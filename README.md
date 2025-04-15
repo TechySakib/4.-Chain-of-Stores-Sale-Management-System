@@ -37,11 +37,12 @@ A comprehensive web-based sales management system designed to manage multiple re
 ## 🗂️ Project Structure
 store_management/
 
-├── includes/
-│   ├── db_connect.php                  # MySQL database connection
-│   └── auth.php                        # Authentication and session handling
+store_management/
+├── includes/                         # Configuration and core scripts
+│   ├── db_connect.php                # MySQL database connection
+│   └── auth.php                      # Authentication and session handling
 │
-├── manager/                            # Manager (Admin-level) functionalities
+├── manager/                          # Manager (Admin-level) functionalities
 │   ├── manager_dashboard.php
 │   ├── add_employee.php
 │   ├── view_employees.php
@@ -52,26 +53,27 @@ store_management/
 │   ├── assign_employee_store.php
 │   └── sales_reports.php
 │
-├── employee/                           # Salesman role functionalities
+├── employee/                         # Salesman role functionalities
 │   ├── employee_dashboard.php
 │   ├── view_assigned_stores.php
 │   ├── manage_sales.php
 │   └── view_sales_history.php
 │
-├── customer/                           # Customer-facing pages
-│   
+├── customer/                         # Customer-facing pages
 │   ├── customer_dashboard.php
 │   ├── browse_products.php
 │   ├── submit_review.php
 │   └── purchase_history.php
-├── sql/
-│   └── chain_of_store.sql              # (Optional) SQL file to create and populate the database
 │
-├── register.php
-├── login.php
-├── logout.php                          # Ends session and redirects to login
-├── session.php  
-└── README.md                           # Project documentation
+├── sql/                              # SQL files
+│   └── chain_of_store.sql            # (Optional) SQL file to create and populate the database
+│
+├── register.php                      # Global customer registration
+├── login.php                         # Login page for all roles
+├── logout.php                        # Ends session and redirects to login
+├── session.php                       # Manages active session variables
+└── README.md                         # Project documentation
+
 # Step 1: Move to your server root (htdocs for XAMPP)
 cd /path/to/xampp/htdocs
 
