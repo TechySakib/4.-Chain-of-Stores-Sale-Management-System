@@ -1,15 +1,12 @@
-<!-- footer.php -->
 <footer class="dashboard-footer">
   <div class="footer-content">
     <p class="footer-quote">
       🌿 From the river to the sea, <span>Palestine will be free</span> 
       <span class="pigeon-icon">🕊️</span>
     </p>
-    
   </div>
 </footer>
 
-<!-- Footer Styles -->
 <style>
   .dashboard-footer {
     background-color: #7494ec;
@@ -20,7 +17,8 @@
     border-top-right-radius: 30px;
     font-family: 'Poppins', sans-serif;
     box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.05);
-    margin-top: 60px;
+    width: 100%;
+    margin-top: auto; /* This makes the footer stick to bottom */
   }
 
   .dashboard-footer .footer-content {
@@ -58,18 +56,9 @@
     50% { transform: translateY(-5px); }
   }
 
-  .dashboard-footer .footer-copy {
-    font-size: 14px;
-    opacity: 0.85;
-  }
-
   @media (max-width: 768px) {
     .dashboard-footer .footer-quote {
       font-size: 14px;
-    }
-
-    .dashboard-footer .footer-copy {
-      font-size: 12px;
     }
   }
 </style>
