@@ -1,5 +1,4 @@
 <?php
-
 session_start();
 if (!isset($_SESSION['employee_id'])) {
     header("Location: login.php");
@@ -14,12 +13,12 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Fetch products
-$products = $conn->query("
-    SELECT p.product_id, p.name, p.price, p.stock_quantity, s.store_name 
-    FROM products p
-    JOIN stores s ON p.store_id = s.store_id
-    ORDER BY s.store_name, p.name
+// Fetch stores
+$stores = $conn->query("
+    SELECT s.store_id, s.store_name, s.location, e.name AS manager_name
+    FROM stores s
+    LEFT JOIN employees e ON s.manager_id = e.employee_id
+    ORDER BY s.store_name
 ");
 ?>
 
@@ -28,7 +27,7 @@ $products = $conn->query("
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>View Products</title>
+    <title>View Stores</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -42,8 +41,8 @@ $products = $conn->query("
         body {
             background: linear-gradient(90deg, rgba(255, 255, 255, 1) 0%, rgba(201, 214, 255, 1) 100%);
             min-height: 100vh;
+            padding-top: 181px;
             padding-left: 20px;
-            padding-top: 20px;
             padding-right: 20px;
         }
 
@@ -146,44 +145,34 @@ $products = $conn->query("
             color: #5a7bd4;
             text-decoration: underline;
         }
-
-        .currency {
-            text-align: right;
-        }
-
-        .quantity {
-            text-align: center;
-        }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1><i class="fas fa-boxes"></i> Products List</h1>
+        <h1><i class="fas fa-store"></i> Stores List</h1>
         
-        <a href="add_product.php" class="add-btn"><i class="fas fa-box"></i> Add New Product</a>
+        <a href="add_store.php" class="add-btn"><i class="fas fa-plus"></i> Add New Store</a>
         
         <table>
             <thead>
                 <tr>
-                    <th>Store</th>
-                    <th>Product Name</th>
-                    <th class="currency">Price</th>
-                    <th class="quantity">Quantity</th>
+                    <th>Store Name</th>
+                    <th>Location</th>
+                    <th>Manager</th>
                     <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
-                <?php while ($product = $products->fetch_assoc()): ?>
+                <?php while ($store = $stores->fetch_assoc()): ?>
                     <tr>
-                        <td><?php echo htmlspecialchars($product['store_name']); ?></td>
-                        <td><?php echo htmlspecialchars($product['name']); ?></td>
-                        <td class="currency">$<?php echo number_format($product['price'], 2); ?></td>
-                        <td class="quantity"><?php echo number_format($product['stock_quantity']); ?></td>
+                        <td><?php echo htmlspecialchars($store['store_name']); ?></td>
+                        <td><?php echo htmlspecialchars($store['location']); ?></td>
+                        <td><?php echo $store['manager_name'] ? htmlspecialchars($store['manager_name']) : 'Not assigned'; ?></td>
                         <td>
-                            <a href="edit_product.php?id=<?php echo $product['product_id']; ?>" class="action-btn edit-btn">
+                            <a href="edit_store.php?id=<?php echo $store['store_id']; ?>" class="action-btn edit-btn">
                                 <i class="fas fa-edit"></i> Edit
                             </a>
-                            <a href="delete_product.php?id=<?php echo $product['product_id']; ?>" class="action-btn delete-btn" onclick="return confirm('Are you sure you want to delete this product?');">
+                            <a href="delete_store.php?id=<?php echo $store['store_id']; ?>" class="action-btn delete-btn" onclick="return confirm('Are you sure you want to delete this store?');">
                                 <i class="fas fa-trash"></i> Delete
                             </a>
                         </td>
