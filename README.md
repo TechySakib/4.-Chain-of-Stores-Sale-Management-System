@@ -37,7 +37,7 @@ A comprehensive web-based sales management system designed to manage multiple re
 ## 🗂️ Project Structure
 store_management/
 
-(store_management/
+'''store_management/
 ├── includes/                         # Configuration and core scripts
 │   ├── db_connect.php                # MySQL database connection
 │   └── auth.php                      # Authentication and session handling
@@ -72,7 +72,7 @@ store_management/
 ├── login.php                         # Login page for all roles
 ├── logout.php                        # Ends session and redirects to login
 ├── session.php                       # Manages active session variables
-└── README.md                         # Project documentation)
+└── README.md                         # Project documentation'''
 
 # Step 1: Move to your server root (htdocs for XAMPP)
 cd /path/to/xampp/htdocs
